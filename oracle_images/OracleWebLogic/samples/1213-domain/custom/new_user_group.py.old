@@ -1,0 +1,21 @@
+#from weblogic.management.security.authentication import UserEditorMBean, UserReaderMBean
+#serverConfig()
+print "Connecting to server"
+connect('weblogic','Weblogic1','t3://172.17.0.3:7001')
+#edit()
+#startEdit(-1,-1,'false')
+serverConfig()
+cd('SecurityConfiguration/base_domain/Realms/myrealm/AuthenticationProviders/DefaultAuthenticator')
+cmo.createUser('faisal3','Weblogic22','user')
+#edit()
+#undo(defaultAnswer='y',unactivatedChanges='true')
+#stopEdit('y')
+#atnr=cmo.getSecurityConfiguration().getDefaultRealm().lookupAuthenticationProvider("DefaultAuthenticator")
+#print "*********User Creation***********"
+#try:
+#atnr.createUser(abcdef,Oracleblabla123)
+#atnr.createUser('userone','Password23','user')
+#print "User 1234567 created successfully!!"
+#except Exception:
+#print "Error: User 1234567 already exists!!"
+#execfile('/custom/new_user_group.py')
