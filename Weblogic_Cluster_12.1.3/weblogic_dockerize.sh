@@ -1,20 +1,19 @@
 #!/bin/bash
 #Building a Docker Image for WebLogic 
 
-ORCL=~/dist_oracle/docker-images
-DIST=~/dist_oracle
+# Author localsnet
 
-#1.Git clone the Oracle Docker project repository
-git clone https://github.com/oracle/docker-images.git
+DIST=./Weblogic_Cluster_12.1.3
+
 
 #2.Download required JRE file
 
-cd $ORCL/OracleJava/java-8
+cd $DIST/OracleJava/java-8
 
 #Copy jre file here
-cp $DIST/server-jre-8u151-linux-x64.tar.gz /$ORCL/OracleJava/java-8
+cp $DIST/server-jre-8u151-linux-x64.tar.gz /$DIST/OracleJava/java-8
 
-#To download uncomment below
+#Or download  (uncomment below)
 #wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.tar.gz
 
 #Edit Dockerfile for JRE version
@@ -31,17 +30,17 @@ echo "Build JRE"
 
 echo "Build Weblogic"
 
-cp $DIST/fmw_12.1.3.0.0_wls.jar $ORCL/OracleWebLogic/dockerfiles/12.1.3
+cp $DIST/fmw_12.1.3.0.0_wls.jar $DIST/OracleWebLogic/dockerfiles/12.1.3
 
-cd $ORCL/OracleWebLogic/dockerfiles/
+cd $DIST/OracleWebLogic/dockerfiles/
 
 ./buildDockerImage.sh -v 12.1.3 -g -c
 
 #5. Extend the Oracle WebLogic image by creating a sample empty domain
 echo "Extend to Domain"
 
-cp $DIST/*.py $DIST/createServer.sh $ORCL/OracleWebLogic/samples/1213-domain/container-scripts
-cd $ORCL/OracleWebLogic/samples/1213-domain/
+cp $DIST/*.py $DIST/createServer.sh $DIST/OracleWebLogic/samples/1213-domain/container-scripts
+cd $DIST/OracleWebLogic/samples/1213-domain/
 ./build.sh weblogic1
 
 #6. Run Admin server container #1
